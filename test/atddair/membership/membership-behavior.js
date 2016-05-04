@@ -20,7 +20,7 @@ describe('Membership API', () => {
       let memberCount = getMemberCount();
 
       expect(memberCount).to.eql(1);
-    });
+    }); 
 
   });
 
