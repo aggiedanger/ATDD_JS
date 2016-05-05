@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register --recursive ./test"
+    "test": "mocha --compilers js:babel-core/register --recursive ./test",
+    "features": "node_modules/.bin/cucumber-js --compiler js:babel-core/register --require ./features/support/after_hooks.js -r ./steps"
   },
   "repository": {
     "type": "git",

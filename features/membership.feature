@@ -17,60 +17,47 @@
 ## (Comments)
 
 #Sample Feature Definition Template
+@tag
 Feature: Collect e-mails and usernames
 
+@tag1
 Scenario: A valid username and email is provided by the user.
-Given A user provides a valid username and email
-When A user hits submit
-Then The users username and email are added
-	And the user gets a success message
+When A user provides "bob" as the username and "bob@gmail.com" as the email
+Then There is a user with username "bob" and email "bob@gmail.com"
+	And the member count is incremented by 1
 
-Scenario Outline: A valid username with an invalid email is provided.
-Given A user provides a valid username and an invalid email
-When the user hits submit
-Then the user is not added
-	And the user sees an error message
+@tag2
+Scenario: A valid username with an invalid email is provided.
+When A user provides "abbie" as the username and "bob.com" as the email
+Then There is a user with username "abbie" and email "bob.com"
 
+@tag3
 Scenario: A duplicate email is provided by the user.
-Given an email already exists
-	And a user provides a duplicate
-When the user hits submit
-Then the user is added
-	And the user sees a success message
+Given an email "bill@gmail.com" exists for user "bill"
+When A user provides "sue" as the username and "bill@gmail.com" as the email
+Then There is a user with username "sue" and email "bill@gmail.com"
 
+@tag4
 Scenario: A duplicate username is provided by the user.
-Given a username already exists
-	And a user provides a duplicate
-When the user hits submit
-Then the user is not added
-	And the user sees an error message
+Given an email "bob@gmail.com" exists for user "bob"
+When A user provides "bob" as the username and "sue@gmail.com" as the email
+Then There is a user with username "bob" and email "bob@gmail.com"
+	And an exception is thrown
 
-Scenario: An invalid email address is provided
-Given a user provides an invalid email address
-When the user hits submit
-Then the user is added
-	And the user sees a success message
-
-Scenario: An invalid username is provided with illegal characters
-Given a user provides an invalid username
-When the user hits submit
-Then the user is added
-	And the user sees a success message
-
+@tag5
 Scenario: No username, valid email
-Given a user provides no username but a valid email
-When the user hits submit
-Then the user is added
-	And the user sees a success message
+When A user provides "" as the username and "danger@gmail.com" as the email
+Then the user is added to an email only list with email "danger@gmail.com"
+	And the email only count should be incremented by 1
 
+@tag6
 Scenario: Valid username, no email
-Given a user provides a valid username but no email
-When the user hits submit
-Then the user is not added
-	And the user sees an error message
+When A user provides "james" as the username and "" as the email
+Then the user "james" is not added
+	And an exception is thrown
 
+@tag7
 Scenario: No username, no email
-Given a user provides no username or email
-When the user hit submit
-Then the user is not added
-	And the user sees an error message
+When A user provides "" as the username and "" as the email
+Then the user "" is not added
+	And an exception is thrown
