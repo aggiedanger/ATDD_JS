@@ -1,5 +1,5 @@
 import { SAVE_COMMENT } from '../actions/types';
-const INITIAL_STATE = [];
+const INITIAL_STATE = ['this is the first comment', 'really cool second comment'];
 
 export default function(state = INITIAL_STATE, action={}){
     switch(action.type){
