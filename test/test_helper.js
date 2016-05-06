@@ -25,7 +25,7 @@ function renderComponent(ComponentClass, props={}, state={}) {
     </Provider>
   );
 
-  return $(ReactDOM.findDOMNode(componentInstance));
+  return ReactDOM.findDOMNode(componentInstance);
 }
 
 
@@ -45,4 +45,4 @@ $.fn.simulate = function(eventName, value) {
 chaiJquery(chai, chai.util, $);
 
 
-export { renderComponent, expect };
+export { renderComponent, expect, $ };
